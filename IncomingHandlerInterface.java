@@ -4,16 +4,9 @@ import org.json.JSONObject;
 
 public class IncomingHandlerInterface {
 
-	static boolean turn;
-	static boolean reset;
-	static boolean hit;
-	static String win;
-	static BattleShipGUI gui = new BattleShipGUI();
-	static JSONObject myObject;
+	private static BattleShipGUI gui = new BattleShipGUI();
 
 	public static void handle(JSONObject message) {
-		myObject = message;
-
 		String type = message.optString("type");
 		switch (type) {
 		case "login":
@@ -49,22 +42,19 @@ public class IncomingHandlerInterface {
 
 	public static void applicationHandler(JSONObject mess) {
 		if (mess.has("turn")) {
-			turn = mess.optBoolean("turn");
-			BattleShipGUI.setTurn(turn);
+			BattleShipGUI.setTurn(mess.optBoolean("turn"));
 		}
 		else if (mess.has("hit")) {
-			hit = mess.optBoolean("hit");
 			String coordinate = mess.optString("coordinate");
-			BattleShipGUI.hitMiss(hit, coordinate);
+			BattleShipGUI.hitMiss(mess.optBoolean("hit"), coordinate);
 		}
 		else if (mess.has("win")) {
-			win = mess.optString("win");
+			String win = mess.optString("win");
 			BattleShipGUI.setTurn(false);
 			gui.updateTextArea(win + ": WINS!");
 			gui.setChatMessage(win + ": WINS!");
 		}
 		else if (mess.has("reset")) {
-			reset = mess.optBoolean("reset");
 			gui.updateTextArea("Game has ended please reset board.");
 		}
 	}
