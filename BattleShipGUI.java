@@ -59,10 +59,6 @@ public class BattleShipGUI extends JFrame {
 	private Socket socket;
 	private int port = 8989;
 
-	public BattleShipGUI() {
-
-	}
-
 	public void showGUI() {
 		frame = new JFrame("Battle Ship");
 		mainPanel = new JPanel();
