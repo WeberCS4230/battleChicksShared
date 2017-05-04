@@ -26,35 +26,36 @@ import javax.swing.border.EmptyBorder;
 
 public class BattleShipGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
+
 	private PrintWriter writer;
-	private static JFrame frame;
-	private static JPanel mainPanel, headPanel, chatPanel, textPanel, opponentPanel, myGridPanel, instructionPanel,
+	private JFrame frame;
+	private JPanel mainPanel, headPanel, chatPanel, textPanel, opponentPanel, myGridPanel, instructionPanel,
 			sendPanel, onePanel, twoPanel, threePanel, fourPanel, fivePanel, sixPanel, usernamePanel, shipPanel,
 			winLosePanel;
-	private static JLabel headLabel, userNameLabel, label;
-	private static JTextField userNameTextField;
-	private static JTextArea chatTextArea, textTextArea, instructionTextArea, updateTextArea;
-	private static JScrollPane chatScrollPane, textScrollPane;
-	public JButton[][] gridButtons = new JButton[10][10];
-	public JButton[][] grid2Buttons = new JButton[10][10];
-	public static JButton[][] myBoard;
-	public static JButton[][] opponentBoard;
-	public static JRadioButton verticalRadio, horizontalRadio;
-	private static JButton sendButton, startButton, resetButton, loginButton, restartButton;
-	private static String instructions = "Instructions\nEnter your username.\nPlace all five ships on your grid "
+	private JLabel headLabel, userNameLabel, label;
+	private JTextField userNameTextField;
+	private JTextArea chatTextArea, textTextArea, instructionTextArea, updateTextArea;
+	private JScrollPane chatScrollPane, textScrollPane;
+	private JButton[][] gridButtons = new JButton[10][10];
+	private JButton[][] grid2Buttons = new JButton[10][10];
+	private JButton[][] myBoard;
+	private JButton[][] opponentBoard;
+	private JRadioButton verticalRadio, horizontalRadio;
+	private JButton sendButton, startButton, resetButton, loginButton, restartButton;
+	private String instructions = "Instructions\nEnter your username.\nPlace all five ships on your grid "
 			+ "and hit the START button.\nThe ships will be placed in the order listed below. Select horizontal"
 			+ " or vertical to change the direction they are being placed.\n\n"
 			+ "Your username will be added and you will be connected to the game.\n"
 			+ "In order to make a hit, press the appropriate button on your opponents grid.\n"
 			+ "2 - Two Square  2 - Three Square  1 - Four Square  1 - Five Square";
-	private static ArrayList<String> battleshipButtons = new ArrayList<String>();
-	private static ButtonGroup group;
-	static boolean turn = false;
+	private ArrayList<String> battleshipButtons = new ArrayList<String>();
+	private ButtonGroup group;
+	private  boolean turn = false;
 	public int countShips = 1;
-	static char[] letters = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
-	static char[] numbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-	static int r = 0;
-	static int c = 0;
+	private char[] letters = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
+	private char[] numbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+	private int r = 0;
+	private int c = 0;
 
 	private Socket socket;
 	private int port = 8989;
@@ -283,7 +284,7 @@ public class BattleShipGUI extends JFrame {
 		}
 	}
 
-	public static void findCordinates(String coordinate) {
+	public void findCordinates(String coordinate) {
 		char[] coords = coordinate.toCharArray();
 		Character[] charArray = { coords[0], coords[1] };
 
@@ -388,8 +389,7 @@ public class BattleShipGUI extends JFrame {
 			writer.println(OutgoingHandlerInterface.login(username));
 			writer.flush();
 
-			BattleShipGUI gui = new BattleShipGUI();
-			new Thread(new MessageReader(socket, gui)).start();
+			new Thread(new MessageReader(socket, this)).start();
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -419,7 +419,7 @@ public class BattleShipGUI extends JFrame {
 		updateTextArea.setText(update + "\n");
 	}
 
-	public static void setTurn(Boolean myTurn) {
+	public void setTurn(Boolean myTurn) {
 		turn = myTurn;
 		if (turn) {
 			updateTextArea.append("Your Turn\n");
@@ -428,7 +428,7 @@ public class BattleShipGUI extends JFrame {
 		}
 	}
 
-	public static void hitMiss(Boolean hit, String coordinate) {
+	public void hitMiss(Boolean hit, String coordinate) {
 		findCordinates(coordinate);
 		if (turn && hit) {
 			updateTextArea.setText("   HIT\n");

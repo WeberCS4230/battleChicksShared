@@ -4,9 +4,13 @@ import org.json.JSONObject;
 
 public class IncomingHandlerInterface {
 
-	private static BattleShipGUI gui = new BattleShipGUI();
+	private BattleShipGUI gui;
 
-	public static void handle(JSONObject message) {
+	public IncomingHandlerInterface(BattleShipGUI gui) {
+		this.gui = gui;
+	}
+
+	public void handle(JSONObject message) {
 		String type = message.optString("type");
 		switch (type) {
 		case "login":
@@ -40,17 +44,17 @@ public class IncomingHandlerInterface {
 		}
 	}
 
-	public static void applicationHandler(JSONObject mess) {
+	public void applicationHandler(JSONObject mess) {
 		if (mess.has("turn")) {
-			BattleShipGUI.setTurn(mess.optBoolean("turn"));
+			gui.setTurn(mess.optBoolean("turn"));
 		}
 		else if (mess.has("hit")) {
 			String coordinate = mess.optString("coordinate");
-			BattleShipGUI.hitMiss(mess.optBoolean("hit"), coordinate);
+			gui.hitMiss(mess.optBoolean("hit"), coordinate);
 		}
 		else if (mess.has("win")) {
 			String win = mess.optString("win");
-			BattleShipGUI.setTurn(false);
+			gui.setTurn(false);
 			gui.updateTextArea(win + ": WINS!");
 			gui.setChatMessage(win + ": WINS!");
 		}
