@@ -28,7 +28,6 @@ public class BattleShipGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private PrintWriter writer;
-	private JFrame frame;
 	private JPanel mainPanel, headPanel, chatPanel, textPanel, opponentPanel, myGridPanel, instructionPanel,
 			sendPanel, onePanel, twoPanel, threePanel, fourPanel, fivePanel, sixPanel, usernamePanel, shipPanel,
 			winLosePanel;
@@ -59,12 +58,14 @@ public class BattleShipGUI extends JFrame {
 	private Socket socket;
 	private int port = 8989;
 
+	public BattleShipGUI() {
+		super("Battle Ship");
+	}
+
 	public void showGUI() {
-		frame = new JFrame("Battle Ship");
 		mainPanel = new JPanel();
 		mainPanel.setVisible(true);
 		mainPanel.setLayout(new GridLayout(3, 2));
-		frame.add(mainPanel);
 
 		// instruction Panel
 		onePanel = new JPanel(new GridLayout(2, 1));
@@ -211,12 +212,14 @@ public class BattleShipGUI extends JFrame {
 		mainPanel.add(fourPanel);
 		mainPanel.add(fivePanel);
 		mainPanel.add(sixPanel);
+		
+		add(mainPanel);
 
-		frame.setLayout(new GridLayout());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("Battle Ship");
-		frame.setSize(new Dimension(1050, 1000));
-		frame.setVisible(true);
+		setLayout(new GridLayout());
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Battle Ship");
+		setSize(new Dimension(1050, 1000));
+		setVisible(true);
 	}
 
 	public JButton[][] buildOpponentBoard(JPanel panel) {
