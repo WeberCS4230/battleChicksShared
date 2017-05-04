@@ -51,9 +51,8 @@ public class BattleShipGUI extends JFrame {
 	private ArrayList<String> battleshipButtons = new ArrayList<String>();
 	private ButtonGroup group;
 	private  boolean turn = false;
-	public int countShips = 1;
+	private int countShips = 1;
 	private char[] letters = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
-	private char[] numbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 	private int r = 0;
 	private int c = 0;
 
@@ -223,7 +222,6 @@ public class BattleShipGUI extends JFrame {
 	public JButton[][] buildOpponentBoard(JPanel panel) {
 		for (int r = 0; r < 10; r++) {
 			for (int c = 0; c < 10; c++) {
-				String[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
 				grid2Buttons[r][c] = new JButton("" + letters[r] + c);
 				grid2Buttons[r][c].setPreferredSize(new Dimension(15, 15));
 				grid2Buttons[r][c].addActionListener(new ActionListener() {
@@ -249,7 +247,6 @@ public class BattleShipGUI extends JFrame {
 	public JButton[][] buildMyBoard(JPanel panel) {
 		for (int r = 0; r < 10; r++) {
 			for (int c = 0; c < 10; c++) {
-				String[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
 				gridButtons[r][c] = new JButton("" + letters[r] + c);
 				gridButtons[r][c].setPreferredSize(new Dimension(15, 15));
 				gridButtons[r][c].addActionListener(new ActionListener() {
@@ -287,6 +284,8 @@ public class BattleShipGUI extends JFrame {
 	public void findCordinates(String coordinate) {
 		char[] coords = coordinate.toCharArray();
 		Character[] charArray = { coords[0], coords[1] };
+
+		char[] numbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
 		for (int x = 0; x < 10; x++) {
 			if (charArray[0].equals(letters[x])) {
