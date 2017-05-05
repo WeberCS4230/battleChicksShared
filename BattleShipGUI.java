@@ -27,10 +27,14 @@ import javax.swing.border.EmptyBorder;
 public class BattleShipGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 
+	private static final String INSTRUCTIONS = "Instructions\nEnter your username.\nPlace all five ships on your grid "
+			+ "and hit the START button.\nThe ships will be placed in the order listed below. Select horizontal"
+			+ " or vertical to change the direction they are being placed.\n\n"
+			+ "Your username will be added and you will be connected to the game.\n"
+			+ "In order to make a hit, press the appropriate button on your opponents grid.\n"
+			+ "2 - Two Square  2 - Three Square  1 - Four Square  1 - Five Square";
+
 	private PrintWriter writer;
-	private JPanel mainPanel, headPanel, chatPanel, textPanel, opponentPanel, myGridPanel, instructionPanel,
-			sendPanel, onePanel, twoPanel, threePanel, fourPanel, fivePanel, sixPanel, usernamePanel, shipPanel,
-			winLosePanel;
 	private JLabel headLabel, userNameLabel, label;
 	private JTextField userNameTextField;
 	private JTextArea chatTextArea, textTextArea, instructionTextArea, updateTextArea;
@@ -41,14 +45,7 @@ public class BattleShipGUI extends JFrame {
 	private JButton[][] opponentBoard;
 	private JRadioButton verticalRadio, horizontalRadio;
 	private JButton sendButton, startButton, resetButton, loginButton, restartButton;
-	private String instructions = "Instructions\nEnter your username.\nPlace all five ships on your grid "
-			+ "and hit the START button.\nThe ships will be placed in the order listed below. Select horizontal"
-			+ " or vertical to change the direction they are being placed.\n\n"
-			+ "Your username will be added and you will be connected to the game.\n"
-			+ "In order to make a hit, press the appropriate button on your opponents grid.\n"
-			+ "2 - Two Square  2 - Three Square  1 - Four Square  1 - Five Square";
 	private ArrayList<String> battleshipButtons = new ArrayList<String>();
-	private ButtonGroup group;
 	private  boolean turn = false;
 	private int countShips = 1;
 	private char[] letters = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
@@ -63,22 +60,23 @@ public class BattleShipGUI extends JFrame {
 	}
 
 	public void showGUI() {
-		mainPanel = new JPanel();
+		JPanel mainPanel = new JPanel();
 		mainPanel.setVisible(true);
 		mainPanel.setLayout(new GridLayout(3, 2));
 
 		// instruction Panel
-		onePanel = new JPanel(new GridLayout(2, 1));
+		JPanel onePanel = new JPanel(new GridLayout(2, 1));
 		onePanel.setVisible(true);
-		instructionPanel = new JPanel();
+		JPanel instructionPanel = new JPanel();
 		instructionPanel.setVisible(true);
 		instructionTextArea = new JTextArea(20, 40);
-		instructionTextArea.append(instructions);
+		instructionTextArea.append(INSTRUCTIONS);
 		instructionTextArea.setLineWrap(true);
 		instructionTextArea.setEditable(false);
 		instructionPanel.add(instructionTextArea);
-		shipPanel = new JPanel(new GridLayout(2, 3));
-		group = new ButtonGroup();
+		JPanel shipPanel = new JPanel(new GridLayout(2, 3));
+
+		ButtonGroup group = new ButtonGroup();
 		verticalRadio = new JRadioButton("Vertical Ship", true);
 		verticalRadio.setBorder(new EmptyBorder(10, 50, 10, 0));
 		label = new JLabel("");
@@ -114,16 +112,16 @@ public class BattleShipGUI extends JFrame {
 		onePanel.add(shipPanel);
 
 		// header Panel
-		twoPanel = new JPanel(new GridLayout(1, 1));
+		JPanel twoPanel = new JPanel(new GridLayout(1, 1));
 		twoPanel.setVisible(true);
-		headPanel = new JPanel(new GridLayout(3, 1));
+		JPanel headPanel = new JPanel(new GridLayout(3, 1));
 		headPanel.setVisible(true);
 		headLabel = new JLabel("Battle Ship", SwingConstants.CENTER);
 		headLabel.setFont(headLabel.getFont().deriveFont(32.0f));
 		headLabel.setBorder(new EmptyBorder(25, 100, 25, 100));
 		headPanel.add(headLabel);
 
-		usernamePanel = new JPanel();
+		JPanel usernamePanel = new JPanel();
 		usernamePanel.setVisible(true);
 		usernamePanel.setSize(12, 40);
 		userNameLabel = new JLabel("Username: ");
@@ -139,7 +137,7 @@ public class BattleShipGUI extends JFrame {
 		usernamePanel.add(loginButton);
 		headPanel.add(usernamePanel);
 
-		winLosePanel = new JPanel();
+		JPanel winLosePanel = new JPanel();
 		winLosePanel.setVisible(true);
 		updateTextArea = new JTextArea(20, 40);
 		updateTextArea.setEditable(false);
@@ -148,9 +146,9 @@ public class BattleShipGUI extends JFrame {
 		twoPanel.add(headPanel);
 
 		// opponent Panel
-		threePanel = new JPanel(new GridLayout());
+		JPanel threePanel = new JPanel(new GridLayout());
 		threePanel.setVisible(true);
-		opponentPanel = new JPanel(new GridLayout(10, 10));
+		JPanel opponentPanel = new JPanel(new GridLayout(10, 10));
 		opponentPanel.setVisible(true);
 		opponentPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		opponentBoard = buildOpponentBoard(opponentPanel);
@@ -158,9 +156,9 @@ public class BattleShipGUI extends JFrame {
 		threePanel.add(opponentPanel);
 
 		// chat Panel
-		fourPanel = new JPanel(new GridLayout());
+		JPanel fourPanel = new JPanel(new GridLayout());
 		fourPanel.setVisible(true);
-		chatPanel = new JPanel();
+		JPanel chatPanel = new JPanel();
 		chatTextArea = new JTextArea(20, 40);
 		chatTextArea.setLineWrap(true);
 		chatTextArea.setEditable(false);
@@ -172,10 +170,10 @@ public class BattleShipGUI extends JFrame {
 		fourPanel.add(chatPanel);
 
 		// myGrid Panel
-		fivePanel = new JPanel(new GridLayout());
+		JPanel fivePanel = new JPanel(new GridLayout());
 		fivePanel.setVisible(true);
 		fivePanel.setSize(50, 50);
-		myGridPanel = new JPanel(new GridLayout(10, 10));
+		JPanel myGridPanel = new JPanel(new GridLayout(10, 10));
 		myGridPanel.setVisible(true);
 		myGridPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		myBoard = buildMyBoard(myGridPanel);
@@ -183,9 +181,9 @@ public class BattleShipGUI extends JFrame {
 		fivePanel.add(myGridPanel);
 
 		// send text Panel
-		sixPanel = new JPanel(new GridLayout(2, 1));
+		JPanel sixPanel = new JPanel(new GridLayout(2, 1));
 		sixPanel.setVisible(true);
-		textPanel = new JPanel();
+		JPanel textPanel = new JPanel();
 		textTextArea = new JTextArea(10, 40);
 		textTextArea.setLineWrap(true);
 		textTextArea.setEditable(true);
@@ -195,7 +193,7 @@ public class BattleShipGUI extends JFrame {
 		textPanel.setVisible(true);
 		sixPanel.add(textPanel);
 
-		sendPanel = new JPanel();
+		JPanel sendPanel = new JPanel();
 		sendButton = new JButton("Send");
 		sendButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
