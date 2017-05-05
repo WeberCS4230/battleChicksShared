@@ -27,6 +27,7 @@ import javax.swing.border.EmptyBorder;
 public class BattleShipGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 
+	private static final int PORT = 8989;
 	private static final String INSTRUCTIONS = "Instructions\nEnter your username.\nPlace all five ships on your grid "
 			+ "and hit the START button.\nThe ships will be placed in the order listed below. Select horizontal"
 			+ " or vertical to change the direction they are being placed.\n\n"
@@ -46,11 +47,10 @@ public class BattleShipGUI extends JFrame {
 	private  boolean turn = false;
 	private int countShips = 1;
 	private char[] letters = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
-	private int r = 0;
-	private int c = 0;
+	private int row = 0;
+	private int column = 0;
 
 	private Socket socket;
-	private int port = 8989;
 
 	public BattleShipGUI() {
 		super("Battle Ship");
@@ -288,13 +288,13 @@ public class BattleShipGUI extends JFrame {
 		for (int x = 0; x < 10; x++) {
 			if (charArray[0].equals(letters[x])) {
 
-				r = x;
+				row = x;
 			} else {
 				System.out.print("row else " + x + " ,");
 			}
 
 			if (charArray[1].equals(numbers[x])) {
-				c = x;
+				column = x;
 			} else {
 				System.out.print("column else " + x + " ,");
 			}
@@ -305,7 +305,7 @@ public class BattleShipGUI extends JFrame {
 		String coordinate = ((JButton) e.getSource()).getText();
 		findCordinates(coordinate);
 
-		addShipsToBoard(r, c);
+		addShipsToBoard(row, column);
 	}
 
 	public ActionListener addShipsToBoard(int r, int c) {
@@ -380,7 +380,7 @@ public class BattleShipGUI extends JFrame {
 	public void loginButtonActionPerformed() {
 		String username = userNameTextField.getText();
 		try {
-			socket = new Socket(InetAddress.getByName("ec2-52-41-213-54.us-west-2.compute.amazonaws.com"), port);
+			socket = new Socket(InetAddress.getByName("ec2-52-41-213-54.us-west-2.compute.amazonaws.com"), PORT);
 			writer = new PrintWriter(socket.getOutputStream());
 
 			writer.println(OutgoingHandlerInterface.login(username));
@@ -429,16 +429,16 @@ public class BattleShipGUI extends JFrame {
 		findCordinates(coordinate);
 		if (turn && hit) {
 			updateTextArea.setText("   HIT\n");
-			opponentBoard[r][c].setBackground(Color.MAGENTA);
+			opponentBoard[row][column].setBackground(Color.MAGENTA);
 		} else if (turn && !hit) {
 			updateTextArea.setText("   MISS\n");
-			opponentBoard[r][c].setBackground(Color.BLACK);
+			opponentBoard[row][column].setBackground(Color.BLACK);
 		} else if (!turn && hit) {
 			updateTextArea.setText("   HIT\n");
-			myBoard[r][c].setBackground(Color.MAGENTA);
+			myBoard[row][column].setBackground(Color.MAGENTA);
 		} else if (!turn && !hit) {
 			updateTextArea.setText("   MISS\n");
-			myBoard[r][c].setBackground(Color.BLACK);
+			myBoard[row][column].setBackground(Color.BLACK);
 		}
 
 	}
