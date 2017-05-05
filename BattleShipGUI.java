@@ -35,16 +35,13 @@ public class BattleShipGUI extends JFrame {
 			+ "2 - Two Square  2 - Three Square  1 - Four Square  1 - Five Square";
 
 	private PrintWriter writer;
-	private JLabel headLabel, userNameLabel, label;
 	private JTextField userNameTextField;
-	private JTextArea chatTextArea, textTextArea, instructionTextArea, updateTextArea;
-	private JScrollPane chatScrollPane, textScrollPane;
+	private JTextArea chatTextArea, textTextArea, updateTextArea;
 	private JButton[][] gridButtons = new JButton[10][10];
 	private JButton[][] grid2Buttons = new JButton[10][10];
 	private JButton[][] myBoard;
 	private JButton[][] opponentBoard;
 	private JRadioButton verticalRadio, horizontalRadio;
-	private JButton sendButton, startButton, resetButton, loginButton, restartButton;
 	private ArrayList<String> battleshipButtons = new ArrayList<String>();
 	private  boolean turn = false;
 	private int countShips = 1;
@@ -69,7 +66,7 @@ public class BattleShipGUI extends JFrame {
 		onePanel.setVisible(true);
 		JPanel instructionPanel = new JPanel();
 		instructionPanel.setVisible(true);
-		instructionTextArea = new JTextArea(20, 40);
+		JTextArea instructionTextArea = new JTextArea(20, 40);
 		instructionTextArea.append(INSTRUCTIONS);
 		instructionTextArea.setLineWrap(true);
 		instructionTextArea.setEditable(false);
@@ -79,7 +76,7 @@ public class BattleShipGUI extends JFrame {
 		ButtonGroup group = new ButtonGroup();
 		verticalRadio = new JRadioButton("Vertical Ship", true);
 		verticalRadio.setBorder(new EmptyBorder(10, 50, 10, 0));
-		label = new JLabel("");
+		JLabel label = new JLabel("");
 		horizontalRadio = new JRadioButton("Horizontal Ship", false);
 		horizontalRadio.setBorder(new EmptyBorder(10, 0, 10, 50));
 		group.add(verticalRadio);
@@ -87,19 +84,19 @@ public class BattleShipGUI extends JFrame {
 		shipPanel.add(verticalRadio);
 		shipPanel.add(label);
 		shipPanel.add(horizontalRadio);
-		startButton = new JButton("Start");
+		JButton startButton = new JButton("Start");
 		startButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				startButtonActionPerformed();
 			}
 		});
-		resetButton = new JButton("Reset Boards");
+		JButton resetButton = new JButton("Reset Boards");
 		resetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				resetButtonActionPerformed();
 			}
 		});
-		restartButton = new JButton("Restart Game");
+		JButton restartButton = new JButton("Restart Game");
 		restartButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				restartButtonActionPerformed();
@@ -116,7 +113,7 @@ public class BattleShipGUI extends JFrame {
 		twoPanel.setVisible(true);
 		JPanel headPanel = new JPanel(new GridLayout(3, 1));
 		headPanel.setVisible(true);
-		headLabel = new JLabel("Battle Ship", SwingConstants.CENTER);
+		JLabel headLabel = new JLabel("Battle Ship", SwingConstants.CENTER);
 		headLabel.setFont(headLabel.getFont().deriveFont(32.0f));
 		headLabel.setBorder(new EmptyBorder(25, 100, 25, 100));
 		headPanel.add(headLabel);
@@ -124,11 +121,11 @@ public class BattleShipGUI extends JFrame {
 		JPanel usernamePanel = new JPanel();
 		usernamePanel.setVisible(true);
 		usernamePanel.setSize(12, 40);
-		userNameLabel = new JLabel("Username: ");
+		JLabel userNameLabel = new JLabel("Username: ");
 		usernamePanel.add(userNameLabel);
-		userNameTextField = new JTextField(25);
+		JTextField userNameTextField = new JTextField(25);
 		usernamePanel.add(userNameTextField);
-		loginButton = new JButton("Login");
+		JButton loginButton = new JButton("Login");
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loginButtonActionPerformed();
@@ -139,7 +136,7 @@ public class BattleShipGUI extends JFrame {
 
 		JPanel winLosePanel = new JPanel();
 		winLosePanel.setVisible(true);
-		updateTextArea = new JTextArea(20, 40);
+		JTextArea updateTextArea = new JTextArea(20, 40);
 		updateTextArea.setEditable(false);
 		winLosePanel.add(updateTextArea);
 		headPanel.add(winLosePanel);
@@ -159,11 +156,11 @@ public class BattleShipGUI extends JFrame {
 		JPanel fourPanel = new JPanel(new GridLayout());
 		fourPanel.setVisible(true);
 		JPanel chatPanel = new JPanel();
-		chatTextArea = new JTextArea(20, 40);
+		JTextArea chatTextArea = new JTextArea(20, 40);
 		chatTextArea.setLineWrap(true);
 		chatTextArea.setEditable(false);
 
-		chatScrollPane = new JScrollPane(chatTextArea);
+		JScrollPane chatScrollPane = new JScrollPane(chatTextArea);
 		chatScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		chatPanel.add(chatScrollPane);
 		chatPanel.setVisible(true);
@@ -187,14 +184,14 @@ public class BattleShipGUI extends JFrame {
 		textTextArea = new JTextArea(10, 40);
 		textTextArea.setLineWrap(true);
 		textTextArea.setEditable(true);
-		textScrollPane = new JScrollPane(textTextArea);
+		JScrollPane textScrollPane = new JScrollPane(textTextArea);
 		textScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		textPanel.add(textScrollPane);
 		textPanel.setVisible(true);
 		sixPanel.add(textPanel);
 
 		JPanel sendPanel = new JPanel();
-		sendButton = new JButton("Send");
+		JButton sendButton = new JButton("Send");
 		sendButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				sendButtonActionPerformed();
