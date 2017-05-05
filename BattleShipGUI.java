@@ -308,7 +308,7 @@ public class BattleShipGUI extends JFrame {
 		addShipsToBoard(row, column);
 	}
 
-	public ActionListener addShipsToBoard(int r, int c) {
+	public void addShipsToBoard(int r, int c) {
 		int size;
 
 		switch (countShips) {
@@ -340,8 +340,6 @@ public class BattleShipGUI extends JFrame {
 		}
 
 		countShips++;
-
-		return null;
 	}
 
 	public ActionListener buildShip(int r, int c, int size) {
